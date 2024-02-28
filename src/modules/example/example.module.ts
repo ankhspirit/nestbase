@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 
+import { ContentModule } from '../content/content.module';
+
 import { TestController } from './controllers/test.controller';
 import { EighthService } from './services/eighth.service';
 import { EleventhService } from './services/eleventh.service';
@@ -22,6 +24,7 @@ const firstObject = {
 const firstInstance = new FirstService();
 
 @Module({
+    imports: [ContentModule],
     providers: [
         {
             provide: FirstService,

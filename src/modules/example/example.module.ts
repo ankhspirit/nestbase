@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
 
 import { TestController } from './controllers/test.controller';
+import { FifthService } from './services/fifth.service';
 import { FirstService } from './services/first.service';
 import { FourthService } from './services/fourth.service';
 import { SecondService } from './services/second.service';
+import { SixthService } from './services/sixth.service';
 import { ThirdService } from './services/third.service';
 
 const firstObject = {
@@ -46,6 +48,8 @@ const firstInstance = new FirstService();
                 return factory.getPromise();
             },
         },
+        FifthService,
+        SixthService,
     ],
     controllers: [TestController],
 })

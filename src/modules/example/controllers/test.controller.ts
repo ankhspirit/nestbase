@@ -1,5 +1,6 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 
+import { FifthService } from '../services/fifth.service';
 import { FirstService } from '../services/first.service';
 import { FourthService } from '../services/fourth.service';
 import { SecondService } from '../services/second.service';
@@ -12,6 +13,7 @@ export class TestController {
         @Inject('FACTORY-EXAMPLE') private ftExp: FourthService,
         @Inject('ALIAS-EXAMPLE') private asExp: FirstService,
         @Inject('ASYNC-EXAMPLE') private acExp: SecondService,
+        private fifth: FifthService,
     ) {}
 
     @Get('value')
@@ -37,5 +39,10 @@ export class TestController {
     @Get('async')
     async useAsync() {
         return this.acExp.useAsync();
+    }
+
+    @Get('circular')
+    async useCircular() {
+        return this.fifth.circular();
     }
 }

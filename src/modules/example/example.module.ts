@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 
+import { ContentModule } from '../content/content.module';
+
 import { TestController } from './controllers/test.controller';
 import { TransientTestController } from './controllers/transientTest.controller';
 import { EighthService } from './services/eighth.service';
@@ -23,6 +25,7 @@ const firstObject = {
 const firstInstance = new FirstService();
 
 @Module({
+    imports: [ContentModule],
     providers: [
         {
             provide: FirstService,

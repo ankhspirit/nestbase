@@ -1,5 +1,10 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 
+import { PostService } from '@/modules/content/services/post.service';
+
+import { DynamicConfigService } from '@/modules/core-dynamic/services/config.service';
+import { StaticConfigService } from '@/modules/core-static/services/config.service';
+
 import { EighthService } from '../services/eighth.service';
 import { FifthService } from '../services/fifth.service';
 import { FirstService } from '../services/first.service';
@@ -22,6 +27,9 @@ export class TestController {
         private eighth: EighthService,
         private nineth: NinethService,
         private tenth: TenthService,
+        private postService: PostService,
+        private staticConfigService: StaticConfigService,
+        private dynamicConfigService: DynamicConfigService,
     ) {}
 
     @Get('value')
@@ -68,5 +76,20 @@ export class TestController {
         await this.nineth.add();
         console.log(`in controller: ${await this.nineth.find()}`);
         return 'Request Scope Test';
+    }
+
+    @Get('posts')
+    async posts() {
+        return this.postService.findAll();
+    }
+
+    @Get('name-static')
+    async nameStatic() {
+        return this.staticConfigService.get('name');
+    }
+
+    @Get('name-dynamic')
+    async nameDynamic() {
+        return this.dynamicConfigService.get('name');
     }
 }

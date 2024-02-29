@@ -1,12 +1,19 @@
 import { Module } from '@nestjs/common';
 
 import { TestController } from './controllers/test.controller';
+import { TransientTestController } from './controllers/transientTest.controller';
+import { EighthService } from './services/eighth.service';
+import { EleventhService } from './services/eleventh.service';
 import { FifthService } from './services/fifth.service';
 import { FirstService } from './services/first.service';
 import { FourthService } from './services/fourth.service';
+import { NinethService } from './services/nineth.service';
 import { SecondService } from './services/second.service';
+import { SeventhService } from './services/seventh.service';
 import { SixthService } from './services/sixth.service';
+import { TenthService } from './services/tenth.service';
 import { ThirdService } from './services/third.service';
+import { TwelfthService } from './services/twelfth.service';
 
 const firstObject = {
     useValue: () => 'useValue提供者',
@@ -50,7 +57,13 @@ const firstInstance = new FirstService();
         },
         FifthService,
         SixthService,
+        SeventhService,
+        EighthService,
+        NinethService,
+        TenthService,
+        EleventhService,
+        TwelfthService,
     ],
-    controllers: [TestController],
+    controllers: [TestController, TransientTestController],
 })
 export class ExampleModule {}

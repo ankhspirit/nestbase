@@ -1,9 +1,13 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 
+import { EighthService } from '../services/eighth.service';
 import { FifthService } from '../services/fifth.service';
 import { FirstService } from '../services/first.service';
 import { FourthService } from '../services/fourth.service';
+import { NinethService } from '../services/nineth.service';
 import { SecondService } from '../services/second.service';
+import { SeventhService } from '../services/seventh.service';
+import { TenthService } from '../services/tenth.service';
 
 @Controller('test')
 export class TestController {
@@ -14,6 +18,10 @@ export class TestController {
         @Inject('ALIAS-EXAMPLE') private asExp: FirstService,
         @Inject('ASYNC-EXAMPLE') private acExp: SecondService,
         private fifth: FifthService,
+        private seventh: SeventhService,
+        private eighth: EighthService,
+        private nineth: NinethService,
+        private tenth: TenthService,
     ) {}
 
     @Get('value')
@@ -44,5 +52,21 @@ export class TestController {
     @Get('circular')
     async useCircular() {
         return this.fifth.circular();
+    }
+
+    @Get('scope-default')
+    async echoScopeDefault() {
+        await this.eighth.echo();
+        await this.seventh.add();
+        console.log(`in controller: ${await this.seventh.find()}`);
+        return 'Default Scope Test';
+    }
+
+    @Get('scope-request')
+    async echoScopeRequest() {
+        await this.tenth.echo();
+        await this.nineth.add();
+        console.log(`in controller: ${await this.nineth.find()}`);
+        return 'Request Scope Test';
     }
 }
